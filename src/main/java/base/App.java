@@ -1,4 +1,8 @@
 package base;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 /*
  *  UCF COP3330 Summer 2021 Assignment 1 Solution
  *  Copyright 2021 Scott Matson
@@ -27,4 +31,82 @@ Challenges
 -Modify the program so that it asks for an unlimited number of numbers.
  */
 public class App {
+    static Scanner ui = new Scanner(System.in);
+
+    public static void main(String[] args)
+    {
+        System.out.print("Enter the first number: ");
+        double a = isNum();
+        System.out.print("Enter the second number: ");
+        double b = isNum();
+
+        if(a==b)
+        {
+            while(a==b)
+            {
+                System.out.print("Enter a different second number: ");
+                b = isNum();
+            }
+        }
+
+        System.out.print("Enter the third number: ");
+        double c = isNum();
+        if(a==c || b==c)
+        {
+            while(a==c || (a==c && b==c) || b==c)
+            {
+                System.out.print("Enter a different third number: ");
+                c = isNum();
+            }
+        }
+
+        double max;
+
+        if(a > b)
+        {
+            if(a > c)
+            {
+                max = a;
+                System.out.println("The largest number is " + max + ".");
+            }
+            else if(c > a)
+            {
+                max = c;
+                System.out.println("The largest number is " + max + ".");
+            }
+        }
+
+        if(b > a)
+        {
+            if(b > c)
+            {
+                max = b;
+                System.out.println("The largest number is " + max + ".");
+            }
+            else if(c > b)
+            {
+                max = c;
+                System.out.println("The largest number is " + max + ".");
+            }
+        }
+
+
+
+    }
+
+    public static double isNum()
+    {
+        while (true)
+        {
+            try
+            {
+                return ui.nextDouble();
+            }
+            catch (InputMismatchException e)
+            {
+                ui.next();
+                System.out.print("Sorry, please enter a number: ");
+            }
+        }
+    }
 }
